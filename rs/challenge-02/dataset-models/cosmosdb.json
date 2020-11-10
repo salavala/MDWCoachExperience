@@ -1,0 +1,13 @@
+{
+    "name": "<dataset name>",
+    "properties": {
+        "type": "DocumentDbCollection",
+        "linkedServiceName":{
+            "referenceName": "<Linked Service Name>",
+            "type": "LinkedServiceReference"
+        },
+        "typeProperties": {
+            "collectionName": "<collection name>"
+        }
+    }
+}

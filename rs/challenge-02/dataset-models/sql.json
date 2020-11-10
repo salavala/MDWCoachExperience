@@ -1,0 +1,22 @@
+{
+    "name": "<dataset name>",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "<linked service name>",
+            "type": "LinkedServiceReference"
+        },
+        "parameters": {
+            "tableName": {
+                "type": "String"
+            }
+        },
+        "type": "AzureSqlTable",
+        "typeProperties": {
+            "tableName": {
+                "value": "@dataset().tableName",
+                "type": "Expression"
+            }
+        }
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
+}

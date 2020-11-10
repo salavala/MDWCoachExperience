@@ -1,0 +1,94 @@
+{
+    "name": "<pipeline name>",
+    "properties": {
+        "activities": [
+            {
+                "name": "ForEach_Table",
+                "type": "ForEach",
+                "typeProperties": {
+                    "items": {
+                        "value": "@pipeline().parameters.items",
+                        "type": "Expression"
+                    },
+                    "activities": [
+                        {
+                            "name": "Copy_Rows",
+                            "type": "Copy",
+                            "policy": {
+                                "timeout": "7.00:00:00",
+                                "retry": 0,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "typeProperties": {
+                                "source": {
+                                    "type": "SqlSource"
+                                },
+                                "sink": {
+                                    "type": "AzureBlobFSSink"
+                                },
+                                "enableStaging": false
+                            },
+                            "inputs": [
+                                {
+                                    "referenceName": "<source dataset name>",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "tableName": "@item().source.tableName"
+                                    }
+                                }
+                            ],
+                            "outputs": [
+                                {
+                                    "referenceName": "<sink dataset name>",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "fileName": "@item().destination.fileName",
+                                        "filePath": "@pipeline().parameters.destinationFolder"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        ],
+        "parameters": {
+            "items": {
+                "type": "Array",
+                "defaultValue": [
+                    {
+                        "source": {
+                            "tableName": "[dbo].[Table1]"
+                        },
+                        "destination": {
+                            "fileName": "Table1"
+                        }
+                    },
+                    {
+                        "source": {
+                            "tableName": "[dbo].[Table2]"
+                        },
+                        "destination": {
+                            "fileName": "Table2"
+                        }
+                    },
+                    {
+                        "source": {
+                            "tableName": "[dbo].[TableN]"
+                        },
+                        "destination": {
+                            "fileName": "TableN"
+                        }
+                    }
+                ]
+            },
+            "destinationFolder": {
+                "type": "String",
+                "defaultValue": "<folder name>"
+            }
+        }
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

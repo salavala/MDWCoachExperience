@@ -1,0 +1,12 @@
+{
+    "name": "<dataset name>",
+    "properties": {
+        "type": "CosmosDb",
+        "typeProperties": {
+            "connectionString": {
+                "type": "SecureString",
+                "value": "<cosmosdb connection string>;Database=<database name>"
+            }
+        }
+    }
+}

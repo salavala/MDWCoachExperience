@@ -1,0 +1,12 @@
+{
+    "name": "<linked service name>",
+    "properties": {
+        "type": "AzureSqlDatabase",
+        "typeProperties": {
+            "connectionString": {
+                "type": "SecureString",
+                "value": "<sql database connection string>"
+            }
+        }
+    }
+}

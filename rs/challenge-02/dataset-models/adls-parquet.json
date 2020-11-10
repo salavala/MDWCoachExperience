@@ -1,0 +1,32 @@
+{
+    "name": "<dataset name>",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "<ADLS Linked Service name>",
+            "type": "LinkedServiceReference"
+        },
+        "parameters": {
+            "tableName": {
+                "type": "String"
+            },
+            "filePath": {
+                "type": "string"
+            }
+        },
+        "type": "AzureBlobFSFile",
+        "typeProperties": {
+            "format": {
+                "type": "ParquetFormat"
+            },
+            "fileName": {
+                "value": "@{concat(dataset().tableName, '.parquet')}",
+                "type": "Expression"
+            },
+            "folderPath": {
+                "value": "@dataset().filePath",
+                "type": "Expression"
+            }
+        }
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
+}

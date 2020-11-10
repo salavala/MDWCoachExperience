@@ -1,0 +1,13 @@
+{
+    "name": "<dataset name>",
+    "properties": {
+        "type": "AzureBlobFS",
+        "typeProperties": {
+            "url": "https://<storage account name>.dfs.core.windows.net", 
+            "accountkey": { 
+                "type": "SecureString", 
+                "value": "<storage account key>" 
+            }
+        }
+    }
+}

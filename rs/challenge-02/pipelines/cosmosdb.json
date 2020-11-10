@@ -1,0 +1,42 @@
+{
+    "name": "<pipeline name>",
+    "properties": {
+        "activities": [
+            {
+                "name": "<activity name>",
+                "type": "Copy",
+                "inputs": [
+                    {
+                        "referenceName": "<cosmosdb dataset name>",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "<sink dataset name>",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "filePath": "@pipeline().parameters.destinationFolder",
+                            "fileName": "<file name>"
+                        }
+                    }
+                ],
+                "typeProperties": {
+                    "source": {
+                        "type": "DocumentDbCollectionSource",
+                        "nestingSeparator": ""
+                    },
+                    "sink": {
+                        "type": "AzureBlobFSSink"
+                    }
+                }
+            }
+        ],
+        "parameters": {
+            "destinationFolder": {
+                "type": "String",
+                "defaultValue": "<default value for destinationFolder>"
+            }
+        }
+    }
+}
